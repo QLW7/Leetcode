@@ -1,3 +1,4 @@
+// 哈希表
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
@@ -12,5 +13,24 @@ public:
         return false;
     else
         return true;
+    }
+};
+
+//快慢指针
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+    if(head == NULL || head->next == NULL)
+        return false;
+    ListNode* fast = head->next;
+    ListNode* slow = head;
+    while(fast != slow )
+    {
+        if(fast == NULL || fast->next == NULL)
+            return false;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return fast == NULL ? false : true;
     }
 };
