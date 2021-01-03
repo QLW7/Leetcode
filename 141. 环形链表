@@ -2,13 +2,11 @@ class Solution {
 public:
     bool hasCycle(ListNode *head) {
     set<ListNode*> buttle;
-    ListNode* pos;
     auto ret = buttle.insert(head);
-    head = head->next;
     while(ret.second || head != NULL)
     {
-        ret = buttle.insert(head);
         head = head->next;
+        ret = buttle.insert(head);
     }        
     if(head == NULL)
         return false;
