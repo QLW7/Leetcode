@@ -1,0 +1,16 @@
+class Solution {
+public:
+    void inorder(TreeNode* root,vector<int>& treevec)
+    {
+    if(root == nullptr)
+        return;
+    inorder(root->left,treevec);
+    treevec.push_back(root->val);
+    inorder(root->right,treevec);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> treevec;
+    inorder(root,treevec);
+    return treevec;
+    }
+};
