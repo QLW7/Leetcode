@@ -1,0 +1,27 @@
+class Solution {
+public:
+	vector<string> seq;
+	unordered_set<TreeNode*> sameNodeMap;
+	vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+		supFunction(root);
+		vector<TreeNode*> res;
+		for (auto &i : sameNodeMap)
+		{
+			res.push_back(i);
+
+		}
+		return  res;
+	}
+	string supFunction(TreeNode* Node)
+	{
+		if (Node == nullptr)
+			return "#";
+		string left = supFunction(Node->left);
+		string right = supFunction(Node->right);
+		string temp = to_string(Node->val) + "," +left + "," +  right;
+		if (count(seq.begin(),seq.end(),temp) == 1)
+			sameNodeMap.insert({ Node });
+        seq.push_back(temp);
+        return temp;
+	}
+};
