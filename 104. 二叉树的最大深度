@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root == nullptr)
+            return 0;
+        int lenleft = 0, lenright = 0, len = 0;
+        lenleft = maxDepth(root->left);
+        lenright = maxDepth(root->right);
+        len = lenleft > lenright ? lenleft + 1: lenright +1;
+        return len;
+    }
+};
