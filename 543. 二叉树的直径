@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int ans;
+    int diameterOfBinaryTree(TreeNode* root) {   
+        ans = 1; 
+        maxlen(root);
+        return ans-1;
+    }
+    int maxlen(TreeNode* Node)
+    {
+        if(Node == NULL)
+            return 0;
+        int leftmax = maxlen(Node->left);
+        int rightmax = maxlen(Node->right);
+        int lenmax = leftmax + rightmax + 1;
+        ans = max(ans,lenmax);
+        return max(leftmax,rightmax) + 1;
+    }
+};
