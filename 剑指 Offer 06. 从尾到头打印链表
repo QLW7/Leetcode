@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> reversePrint(ListNode* head) {
+        stack<ListNode*> nodes;
+        ListNode* pnodes = head;
+        while(pnodes != NULL)
+        {
+            nodes.push(pnodes);
+            pnodes = pnodes->next;
+        }
+        vector<int> result;
+        while(!nodes.empty())
+        {
+            // pnodes = nodes.top();
+            result.push_back(nodes.top()->val);
+            nodes.pop();
+        }
+        return result;
+    }
+};
