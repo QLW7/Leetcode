@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int movingCount(int m, int n, int k) {
+        vector<vector<bool>> visited(m, vector<bool>(n, 0));
+        int count = mymovingCount(m, n, 0, 0, k, visited);
+        return count;
+    }
+    int mymovingCount(int row, int cols, int m, int n, int threshold, vector<vector<bool>>& visited )
+    {
+        if(m >= row || m < 0 || n >= cols || n < 0 || visited[m][n] || !check(m,n,threshold))
+            return 0;
+        int count = 0;
+        visited[m][n] = true;
+        count = 1 + mymovingCount(row, cols, m - 1, n, threshold, visited) + 
+                     mymovingCount(row, cols, m, n - 1, threshold, visited) + 
+                      mymovingCount(row, cols, m + 1, n, threshold, visited) +
+                       mymovingCount(row, cols, m, n + 1, threshold, visited);
+        return count;
+    }
+    bool check(int m, int n, int threshold)
+    {
+        return threshold >= getSum(m) + getSum(n) ? true : false;
+    }
+    int getSum(int num)
+    {
+        int sum = 0;
+        while(num > 0)
+        {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+};
