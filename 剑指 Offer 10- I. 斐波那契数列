@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int fib(int n) {
+        int pre1, pre2, temp;
+        pre1 = 0;
+        pre2 = 1;
+        if(n == 0)
+            return 0;
+        if(n == 1)
+            return 1;
+        for(int i = 2; i <= n; i++)
+        {
+            temp = (pre1 + pre2)  % 1000000007;
+            pre1 = pre2;
+            pre2 = temp;
+
+        }
+        return temp;
+    }
+};
