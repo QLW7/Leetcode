@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isSubStructure(TreeNode* A, TreeNode* B) {
+        //basecase
+        if(!A || !B)
+            return false;
+        bool tempresult = myisSubStructure(A, B);
+        if(!tempresult)
+            tempresult = isSubStructure(A->left, B);
+        if(!tempresult)
+            tempresult = isSubStructure(A->right, B);
+        return tempresult;
+    }
+    bool myisSubStructure(TreeNode* A, TreeNode* B)
+    {
+        // 如果 B 已经遍历完了，true
+        if(!B) return true;
+        // 如果 B 还有，但 A 遍历完了，那 B 剩下的就没法匹配了，false
+        if(!A) return false;
+                
+        if(A->val != B->val)
+            return false;
+        return myisSubStructure(A->left, B->left) && myisSubStructure(A->right, B->right);;
+    }
+};
