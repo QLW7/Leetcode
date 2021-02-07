@@ -1,0 +1,21 @@
+class Solution {
+public:
+    ListNode* deleteNode(ListNode* head, int val) {
+        if(head == NULL)
+            return NULL;        
+        ListNode* pre = head, *p = head->next;
+        if(head->val == val)
+            return head->next;
+        while(p != NULL)
+        {
+            if(p->val == val)
+            {
+               pre->next = p->next;
+               return head;
+            }
+            pre = p;    
+            p = p->next;              
+        }
+        return head;    
+    }
+};
