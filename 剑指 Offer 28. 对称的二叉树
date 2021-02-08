@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(root == NULL)
+            return  true;
+        return twoIsSymmetric(root->left, root->right);
+
+    }
+    bool twoIsSymmetric(TreeNode* r1, TreeNode* r2)
+    {
+        if(!r1 || !r2)
+            if(!r1 && !r2)
+                return true;
+            else
+                return false;
+        if(r1->val != r2->val)
+            return false;
+        return twoIsSymmetric(r1->left, r2->right) && twoIsSymmetric(r1->right, r2->left);
+        
+    }
+};
