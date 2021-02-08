@@ -1,0 +1,14 @@
+class Solution {
+public:
+    TreeNode* temp;
+    TreeNode* mirrorTree(TreeNode* root) {
+        if(root == NULL)
+            return NULL;
+        temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        mirrorTree(root->left);
+        mirrorTree(root->right);
+        return root;
+    }
+};
