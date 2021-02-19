@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool verifyPostorder(vector<int>& postorder) {
+        return myverifyPostorder(postorder, 0, postorder.size()-1);
+    }
+    bool myverifyPostorder(vector<int>& postorder, int begin, int end)
+    {
+        if(begin >= end) return true;
+        int b = begin, e = end;
+        int m;
+        while(postorder[b] < postorder[e])
+            b++;
+        m = b;
+        for(int i = b; i < e; i++)
+        {
+            if(postorder[i] < postorder[e]) return false;
+            b++;
+        }
+        return b == e && myverifyPostorder(postorder, begin, m-1) && myverifyPostorder(postorder, m, end-1);
+    }
+};
