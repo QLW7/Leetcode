@@ -1,0 +1,28 @@
+class Solution {
+public:
+
+    Node* pre;
+    Node* memroot;
+    Node* treeToDoublyList(Node* root) {
+    if(!root) return NULL;
+    dfs(root);
+    pre->right = memroot;
+    memroot->left = pre;
+    return memroot;        
+    }
+    void dfs(Node* root)
+    {
+        if(!root) return;
+        dfs(root->left);
+        if(pre)
+        {
+
+            pre->right = root;
+            root->left = pre;
+        }
+        else
+            memroot = root;
+        pre = root;
+        dfs(root->right);        
+    }
+};
