@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool g_InvaildInput = false;
+    double myPow(double x, int n) {
+        g_InvaildInput = false;
+        if( x == 0 && n < 0)
+        {
+            g_InvaildInput = true;
+            return 0.0;
+        }
+        if(n == 0)
+            return 1;  
+        double exponent = 0, exponenttemp = 0;
+        if(n < 0)
+        {
+            exponenttemp = myexponent(x, n);
+            exponent = 1 / exponenttemp;
+        }            
+        else
+            exponent = myexponent(x, n);
+        return exponent;           
+    }
+    double myexponent(double x, int n)
+    {
+        long int num = n;
+        if(x == 0)
+            return 1;
+        if(n < 0)
+            num = -num;
+        if(num == 1)
+            return x;
+        double temp = myexponent(x, num>>1);
+        temp *= temp;
+        if((num & 1) == 1)
+            temp *= x;     
+        return temp;
+    }
+};
