@@ -1,0 +1,32 @@
+class Solution {
+public:
+    string temp;
+    vector<string> permutation(string s) {
+        unordered_set<string> res;
+        vector<bool> visited(s.size(),false);
+        backtrack(res, s, visited);
+        vector<string> resvec;
+        for(auto i : res)
+            resvec.push_back(i);
+        return resvec;
+    }
+    void backtrack(unordered_set<string>& res, string& s, vector<bool>& visited)
+    {
+        if(temp.size() == s.size())
+        {
+            res.insert(temp);
+            return;
+        }
+ 
+        for(int i = 0; i < s.size(); i++)
+        {
+           
+            if(visited[i]) continue;
+            temp += s[i];
+            visited[i] = true;
+            backtrack(res, s, visited);
+            visited[i] = false;
+            temp.pop_back();
+        }
+    }
+};
