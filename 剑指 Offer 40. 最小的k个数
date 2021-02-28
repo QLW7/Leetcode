@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> getLeastNumbers(vector<int>& arr, int k) {
+        if(k >= arr.size()) return arr;
+        if(k == 0)  return {};
+        vector<int> res;
+        quickSerch(arr, 0, arr.size() - 1, k);
+        res.assign(arr.begin(), arr.begin() + k);
+        return res;   
+    }
+    void quickSerch(vector<int>& arr,int left, int right, int k)
+    {
+        int index = partition(arr, left, right);
+        if(index == k - 1) return;
+        if(index < k - 1) quickSerch(arr, index + 1, right, k);
+        if(index > k - 1) quickSerch(arr, left, index - 1, k);
+        return;
+
+    }
+    int partition(vector<int>& arr, int left, int right)
+    {
+        int i = left, j = right;
+        while(i < j)
+        {
+            while(i < j && arr[j] >= arr[left]) j--;
+            while(i < j && arr[i] <= arr[left]) i++;
+            swap(arr[i],arr[j]);
+        }
+        swap(arr[left],arr[i]);
+        return i;
+    }
+};
