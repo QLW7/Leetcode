@@ -1,0 +1,16 @@
+class Solution {
+public:
+    char firstUniqChar(string s) {
+        vector<int> mem(256,0);
+        for(auto i : s)
+        {
+            mem[i-'0']++;
+        }
+        for(auto i : s)
+        {
+            if(mem[i - '0'] == 1)
+                return i;
+        }
+        return ' ';
+    }
+};
