@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int translateNum(int num) {
+        string str = to_string(num);
+        int index = str.size();
+        if(index == 0 || index == 1) return 1;
+        int pre = 1, pp = 1, cur = 2;
+        for(int i = 1; i < index; i++)
+        {
+            string strtemp = str.substr(i-1, 2);
+            if(strtemp >= "10" && strtemp <= "25")
+                cur = pre + pp;
+            else
+                cur = pre;
+            pp = pre;
+            pre = cur;
+        }
+        return cur;
+
+
+    }
+};
