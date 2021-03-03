@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int reversePairs(vector<int>& nums) {
+        vector<int> temp(nums.size());
+        return mergeSort(0, nums.size() - 1, nums, temp);
+        
+    }
+    int mergeSort(int l, int r, vector<int>& nums, vector<int>& temp)
+    {
+        if(l >= r)  return 0;
+        int k = (l + r)/2;
+        int l1 = l, m = k + 1;
+        int res = mergeSort(l, k, nums, temp) + mergeSort(k + 1, r, nums, temp);
+        for(int i = l; i <= r; i++)
+        {
+            temp[i] = nums[i];
+        }
+        for(int j = l; j <= r; j++)
+        {
+            if(l1 == k + 1) 
+            {
+                nums[j] = temp[m];
+                m++;
+            }
+            else if(m == r + 1)
+            {
+                nums[j] = temp[l1];
+                l1++;
+                res += (m - k - 1);
+            }
+            else if(temp[l1] <= temp[m])
+            {
+                nums[j] = temp[l1];
+                l1++;
+                res += (m - k - 1);
+                
+            }
+            else
+            {
+                nums[j] = temp[m];
+                m++;
+            }
+        }
+        return res;
+    }
+};
