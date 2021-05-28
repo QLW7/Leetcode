@@ -1,0 +1,52 @@
+*************求一个字符串的前缀与另一个字符串的后缀的最大相同子串******
+#include<iostream>
+#include<string>
+using namespace std;
+const int maxn = 1e5 + 10;
+void cal_next(string str, int* next, int len)
+{
+	next[0] = next[1] = 0;
+	for (int i = 1; i<len; ++i)
+	{
+		int j = next[i];
+		while (j&&str[i] != str[j])
+			j = next[j];
+		next[i + 1] = (str[j] == str[i]) ? j + 1 : 0;
+	}
+}
+int kmp(string str, int slen, string ptr, int plen)
+{
+
+	int next[maxn];
+	cal_next(ptr, next, plen);
+	int j = 0;
+	for (int i = 0; i<slen; i++)
+	{
+		while (j&&ptr[j] != str[i])
+			j = next[j];
+		if (ptr[j] == str[i])
+			++j;
+	}
+
+	return j;
+}
+
+
+
+int main()
+{
+	string ptr("45678");
+	string str("1234567");
+
+	int plen = ptr.length(), slen = str.length();
+	int len = kmp(str, slen, ptr, plen);
+
+	if (len == 0)  printf("0\n");
+	else {
+		string ans(ptr.substr(0, len));
+		cout << ans;
+	}
+	
+	system("pause");
+	return 0;
+}
